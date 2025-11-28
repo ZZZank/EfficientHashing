@@ -33,9 +33,9 @@ loom {
 
 java {
     withSourcesJar()
-    val java = if (stonecutter.eval("minecraft", ">=1.20.5")) {
+    val java = if (stonecutter.eval(minecraft, ">=1.20.5")) {
         JavaVersion.VERSION_21
-    } else if (stonecutter.eval("minecraft", ">=1.18")) {
+    } else if (stonecutter.eval(minecraft, ">=1.18")) {
         JavaVersion.VERSION_17
     } else {
         JavaVersion.VERSION_1_8

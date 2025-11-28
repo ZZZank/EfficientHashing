@@ -1,5 +1,3 @@
-@file:Suppress("UnstableApiUsage")
-
 plugins {
     id("dev.architectury.loom")
     id("architectury-plugin")
