@@ -1,6 +1,7 @@
 plugins {
     id("dev.architectury.loom")
     id("architectury-plugin")
+    id("com.dorongold.task-tree") version "4.0.1"
 }
 
 val minecraft = stonecutter.current.version
@@ -42,9 +43,4 @@ java {
     }
     targetCompatibility = java
     sourceCompatibility = java
-}
-
-tasks.build {
-    group = "versioned"
-    description = "Must run through 'chiseledBuild'"
 }
