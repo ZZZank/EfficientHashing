@@ -103,14 +103,7 @@ tasks.processResources {
     )
 }
 
-tasks.build {
-    group = "versioned"
-    description = "Must run through 'chiseledBuild'"
-}
-
 tasks.register<Copy>("buildAndCollect") {
-    group = "versioned"
-    description = "Must run through 'chiseledBuild'"
     from(tasks.remapJar.get().archiveFile, tasks.remapSourcesJar.get().archiveFile)
     into(rootProject.layout.buildDirectory.file("libs/${mod.version}/$loader"))
     dependsOn("build")
