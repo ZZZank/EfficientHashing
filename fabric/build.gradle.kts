@@ -87,6 +87,7 @@ tasks.processResources {
         "id" to mod.id,
         "name" to mod.name,
         "version" to mod.version,
+        "authors" to mod.authors,
         "minecraft" to common.mod.prop("mc_dep_fabric")
     )
 }

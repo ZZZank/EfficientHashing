@@ -24,6 +24,7 @@ value class ModData(private val project: Project) {
     val id: String get() = requireProp("mod.id")
     val name: String get() = requireProp("mod.name")
     val version: String get() = requireProp("mod.version")
+    val authors: String get() = requireProp("mod.authors")
     val group: String get() = requireProp("mod.group")
 
     fun prop(key: String) = requireProp("mod.$key")

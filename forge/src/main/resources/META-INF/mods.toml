@@ -1,18 +1,15 @@
 modLoader = "javafml"
 loaderVersion = "*"
-license = "CC0-1.0"
+license = "LGPL-3.0"
 
 [[mods]]
 modId = "${id}"
 version = "${version}"
 displayName = "${name}"
-authors = "Me"
-description = "This is an example description! Tell everyone what your mod is about!"
+authors = "${authors}"
+description = "Better hashing algorithm for Vec3i & BlockPos"
 logoFile = "assets/${id}/icon.png"
 logoBlur = false
 
 [[mixins]]
-config = "template-common.mixins.json"
-
-[[mixins]]
-config = "template-forge.mixins.json"
+config = "efficient_hashing.mixins.json"
