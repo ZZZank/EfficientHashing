@@ -12,31 +12,30 @@ jobs:
       matrix:
         # Use these Java versions
         java: [21]
-        # and run on both Linux and Windows
-        os: [ubuntu-22.04, windows-2022]
     runs-on: ${{ matrix.os }}
     steps:
       - name: checkout repository
         uses: actions/checkout@v4
 
-      - name: validate gradle wrapper
-        uses: gradle/wrapper-validation-action@v2
+      - name: setup Gradle wrapper
+        uses: gradle/actions/setup-gradle@v4.3.1
+        with:
+          gradle-version: 9.2.0
 
-      - name: setup jdk ${{ matrix.java }}
+      - name: setup Java ${{ matrix.java }}
         uses: actions/setup-java@v4
         with:
           java-version: ${{ matrix.java }}
           distribution: 'zulu'
 
       - name: make gradle wrapper executable
-        if: ${{ runner.os != 'Windows' }}
         run: chmod +x ./gradlew
 
       - name: build
         run: ./gradlew buildAndCollect
 
       - name: capture build artifacts
-        if: ${{ runner.os == 'Linux' && matrix.java == '21' }} # Only upload artifacts built from latest java on one OS
+        if: ${{ matrix.java == '21' }} # Only upload artifacts once
         uses: actions/upload-artifact@v4
         with:
           name: Artifacts
