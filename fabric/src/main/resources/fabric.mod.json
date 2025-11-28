@@ -14,7 +14,7 @@
   "environment": "*",
   "entrypoints": {
     "main": [
-      "com.example.template.fabric.TemplateModFabric"
+      "zank.mods.efficient_hashing.fabric.EfficientHashingMod"
     ]
   },
   "mixins": [

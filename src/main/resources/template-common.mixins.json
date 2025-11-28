@@ -1,9 +1,9 @@
 {
   "required": true,
-  "package": "com.example.template.mixin",
+  "package": "zank.mods.efficient_hashing.mixin",
   "compatibilityLevel": "JAVA_17",
   "mixins": [
-    "ExampleMixin"
+    "MixinVec3i"
   ],
   "injectors": {
     "defaultRequire": 1
