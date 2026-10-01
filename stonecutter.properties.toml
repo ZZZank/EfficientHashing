@@ -1,0 +1,61 @@
+# Centralized build properties for all versions and loaders.
+# See https://stonecutter.kikugie.dev/wiki/config/properties#centralized-properties
+#
+# Keys in the top level apply to every node. Tables tagged with a Minecraft
+# version (e.g. ["1.20.1"]) or a loader (e.g. [forge."1.20.1"]) apply only to
+# matching nodes - the tags are registered in `stonecutter.gradle.kts`.
+
+mod.id = "efficient_hashing"
+mod.name = "Efficient Hashing"
+mod.group = "zank.mods"
+mod.version = "1.0.0"
+mod.authors = "Zank"
+
+deps.fabric_loader = "0.16.5"
+
+# Loom variant used by `dev.kikugie.loom-back-compat` for Fabric nodes
+loomx.loom_version = "1.18-SNAPSHOT"
+
+# Publishing placeholders (kept from the old gradle.properties)
+publish.modrinth = "..."
+publish.curseforge = "..."
+
+
+["1.18.2"]
+mod.mc_dep_fabric = ">=1.18 <1.19"
+mod.mc_dep_forgelike = "[1.18, 1.19)"
+mod.mc_title = "1.18.2"
+mod.mc_targets = "1.18 1.18.1 1.18.2"
+
+[forge."1.18.2"]
+deps.loader = "40.3.0"
+
+
+["1.19.2"]
+mod.mc_dep_fabric = ">=1.19 <1.20"
+mod.mc_dep_forgelike = "[1.19, 1.20)"
+mod.mc_title = "1.19.2"
+mod.mc_targets = "1.19 1.19.1 1.19.2"
+
+[forge."1.19.2"]
+deps.loader = "43.5.0"
+
+
+["1.20.1"]
+mod.mc_dep_fabric = ">=1.20 <=1.20.1"
+mod.mc_dep_forgelike = "[1.20, 1.20.1]"
+mod.mc_title = "1.20.1"
+mod.mc_targets = "1.20 1.20.1"
+
+[forge."1.20.1"]
+deps.loader = "47.3.0"
+
+
+["1.21.1"]
+mod.mc_dep_fabric = ">=1.21 <=1.21.1"
+mod.mc_dep_forgelike = "[1.21, 1.21.1]"
+mod.mc_title = "1.21.1"
+mod.mc_targets = "1.21 1.21.1"
+
+[neoforge."1.21.1"]
+deps.neo_loader = "21.1.66"
