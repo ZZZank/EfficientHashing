@@ -1,5 +1,9 @@
+import java.util.function.BiConsumer
+
 plugins {
     id("net.neoforged.moddev.legacyforge") version "2.0.148"
+    id("neoforge-mutex")
+    id("com.hypherionmc.modutils.modpublisher") version "2.2.3"
 }
 
 // DO NOT set group = ...!
@@ -130,5 +134,50 @@ tasks {
             named<Jar>("sourcesJar").flatMap { it.archiveFile },
         )
         into(rootProject.layout.buildDirectory.file("libs/${project.property("mod.version")}"))
+    }
+}
+
+// see: https://github.com/firstdarkdev/modpublisher
+publisher {
+    validatedProp("publish.modrinth", "MODRINTH_TOKEN") { id, key ->
+        modrinthID.set(id)
+        apiKeys { modrinth(key) }
+    }
+
+    validatedProp("publish.curseforge", "CURSE_TOKEN") { id, key ->
+        curseID.set(id)
+        apiKeys { curseforge(key) }
+    }
+
+    validatedProp("publish.github", "GITHUB_TOKEN") { id, key ->
+        githubRepo.set(id)
+        apiKeys { github(key) }
+    }
+
+    if (sc.properties["publish.type"] as String == "debug") {
+        // Enable Debug mode. When enabled, no files will actually be uploaded
+        debug.set(true)
+    } else {
+        versionType.set(sc.properties["publish.type"] as String)
+    }
+
+    val modVersion = sc.properties["mod.version"] as String
+    val mcVersionTitle = sc.properties["mod.mc_title"] as String
+    val platform = "forge"
+
+    changelog.set(rootProject.file("CHANGELOG.md"))
+    projectVersion.set(modVersion)
+    // Example: 1.2.3 for 1.20.1 forge
+    displayName.set("$modVersion for $mcVersionTitle $platform")
+    gameVersions.set((sc.properties["mod.mc_targets"] as String).split(" "))
+    loaders.set(listOf(platform))
+    artifact.set(tasks.named("reobfJar"))
+}
+
+fun validatedProp(prop: String, env: String, action: BiConsumer<String, String>) {
+    val projectID = if (project.hasProperty(prop)) { project.property(prop) as String } else { null }
+    val apiKey = System.getenv(env)
+    if (projectID != null && !projectID.startsWith('[') && apiKey != null && apiKey.isNotEmpty()) {
+        action.accept(projectID, apiKey)
     }
 }

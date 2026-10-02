@@ -18,9 +18,14 @@ deps.fabric_loader = "0.16.5"
 # Loom variant used by `dev.kikugie.loom-back-compat` for Fabric nodes
 loomx.loom_version = "1.18-SNAPSHOT"
 
-# Publishing placeholders (kept from the old gradle.properties)
-publish.modrinth = "..."
-publish.curseforge = "..."
+
+# debug / release / beta / alpha
+# debug -> debug mode, no file will be actually uploaded
+publish.type = "release"
+
+publish.modrinth = "zEcqovh2"
+publish.curseforge = "1393802"
+publish.github = "[github repo, e.g. ZZZank/EfficientHashing]"
 
 
 ["1.18.2"]
