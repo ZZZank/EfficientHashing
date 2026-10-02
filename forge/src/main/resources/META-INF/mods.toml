@@ -1,15 +1,33 @@
+# See the MDK reference: .ref/MDK-Forge-1.20.1-ModDevGradle/src/main/templates/META-INF/mods.toml
+# Expanded by `processResources` in build.forge.gradle.kts.
+
 modLoader = "javafml"
-loaderVersion = "*"
-license = "LGPL-3.0"
+# The loader version range for regular FML @Mod mods is the Forge version range
+loaderVersion = "${loader_range}"
+license = "${license}"
 
 [[mods]]
 modId = "${id}"
 version = "${version}"
 displayName = "${name}"
 authors = "${authors}"
-description = "Better hashing algorithm for Vec3i & BlockPos"
+description = '''${description}'''
 logoFile = "assets/${id}/icon.png"
 logoBlur = false
 
 [[mixins]]
 config = "efficient_hashing.mixins.json"
+
+[[dependencies.${id}]]
+    modId = "forge"
+    mandatory = true
+    versionRange = "${forge_range}"
+    ordering = "NONE"
+    side = "BOTH"
+
+[[dependencies.${id}]]
+    modId = "minecraft"
+    mandatory = true
+    versionRange = "${minecraft}"
+    ordering = "NONE"
+    side = "BOTH"

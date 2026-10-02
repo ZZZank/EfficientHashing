@@ -10,6 +10,8 @@ mod.name = "Efficient Hashing"
 mod.group = "zank.mods"
 mod.version = "1.0.0"
 mod.authors = "Zank"
+mod.license = "LGPL-3.0"
+mod.description = "Better hashing algorithm for Vec3i & BlockPos"
 
 deps.fabric_loader = "0.16.5"
 

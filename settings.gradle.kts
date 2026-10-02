@@ -6,9 +6,6 @@ pluginManagement {
         maven("https://maven.neoforged.net/releases/") { name = "NeoForged" }
         maven("https://maven.kikugie.dev/releases") { name = "KikuGie Releases" }
         maven("https://maven.kikugie.dev/snapshots") { name = "KikuGie Snapshots" }
-        // Re-enable together with the Forge nodes (see `match(...)` below):
-        // maven("https://maven.minecraftforge.net") { name = "MinecraftForge" }
-        // maven("https://maven.architectury.dev") { name = "Architectury" }
     }
 }
 
@@ -41,15 +38,12 @@ stonecutter {
         }
 
         // See https://stonecutter.kikugie.dev/wiki/start/#choosing-minecraft-versions
-        match("1.18.2", "fabric") // , "forge")
-        match("1.19.2", "fabric") // , "forge")
-        match("1.20.1", "fabric") // , "forge")
+        // Forge uses `net.neoforged.moddev.legacyforge`, which supports MC 1.17 - 1.20.1
+        // (see LEGACY.md in .ref/MDK-Forge-1.20.1-ModDevGradle).
+        match("1.18.2", "fabric", "forge")
+        match("1.19.2", "fabric", "forge")
+        match("1.20.1", "fabric", "forge")
         match("1.21.1", "fabric", "neoforge")
-
-        // NOTE: legacy Forge (1.18.2 - 1.20.1) is temporarily disabled until a modern
-        // toolkit for it is set up. The previous Arch Loom based setup is preserved,
-        // commented out, in `build.forge.gradle.kts`. To re-enable, uncomment the
-        // `"forge"` arguments above and the Forge maven repositories in `pluginManagement`.
 
         vcsVersion = "1.20.1-fabric"
     }
