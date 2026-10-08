@@ -117,8 +117,12 @@ tasks {
             register("loader_range", "[${forgeVersion.substringBefore('.')},)")
         }
 
-        filesMatching("META-INF/mods.toml") { expand(props) }
-        filesMatching("pack.mcmeta") { expand(props) }
+        filesMatching(listOf("META-INF/mods.toml", "pack.mcmeta")) { expand(props) }
+
+        val mixinJava = "JAVA_${requiredJava.majorVersion}"
+        filesMatching("*.mixins.json") { expand("java" to mixinJava) }
+
+        exclude("fabric.mod.json")
     }
 
     jar {

@@ -98,7 +98,7 @@ tasks {
             register("minecraft", sc.properties["mod.mc_dep_forgelike"])
         }
 
-        filesMatching("META-INF/neoforge.mods.toml") { expand(props) }
+        filesMatching(listOf("META-INF/neoforge.mods.toml", "pack.mcmeta")) { expand(props) }
 
         val mixinJava = "JAVA_${requiredJava.majorVersion}"
         filesMatching("*.mixins.json") { expand("java" to mixinJava) }
