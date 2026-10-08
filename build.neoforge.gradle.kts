@@ -6,8 +6,16 @@ plugins {
     id("com.hypherionmc.modutils.modpublisher") version "2.2.3"
 }
 
-version = "${property("mod.version")}+${sc.current.version}"
-base.archivesName = "${property("mod.id") as String}-neoforge"
+fun prop(key: String): Any? {
+    return if (project.hasProperty(key)) {
+        project.property(key)
+    } else {
+        sc.properties[key]
+    }
+}
+
+version = "${prop("mod.version")}+${sc.current.version}"
+base.archivesName = "${prop("mod.id") as String}-neoforge"
 
 val requiredJava = when {
     sc.current.parsed >= "26.1" -> JavaVersion.VERSION_25
@@ -106,9 +114,9 @@ tasks {
         group = "build"
         description = "Builds mod jars and copies results to `build/libs/{mod version}/`"
 
-        inputs.property("version", project.property("mod.version"))
+        inputs.property("version", prop("mod.version"))
         from(jar.flatMap { it.archiveFile }, named<Jar>("sourcesJar").flatMap { it.archiveFile })
-        into(rootProject.layout.buildDirectory.file("libs/${project.property("mod.version")}"))
+        into(rootProject.layout.buildDirectory.file("libs/${prop("mod.version")}"))
     }
 }
 
@@ -129,11 +137,7 @@ publisher {
         apiKeys { github(key) }
     }
 
-    val publishType = if (project.hasProperty("publish.type")) {
-        project.property("publish.type") // for supporting `-Pxxx=yyy` in command
-    } else {
-        sc.properties["publish.type"]
-    } as String
+    val publishType = prop("publish.type") as String
     if (publishType == "debug") {
         // Enable Debug mode. When enabled, no files will actually be uploaded
         debug.set(true)
@@ -155,7 +159,7 @@ publisher {
 }
 
 fun validatedProp(prop: String, env: String, action: BiConsumer<String, String>) {
-    val projectID = if (project.hasProperty(prop)) { project.property(prop) as String } else { null }
+    val projectID = prop(prop) as String?
     val apiKey = System.getenv(env)
     if (projectID != null && !projectID.startsWith('[') && apiKey != null && apiKey.isNotEmpty()) {
         action.accept(projectID, apiKey)
