@@ -71,7 +71,6 @@ java {
     sourceCompatibility = requiredJava
 
     toolchain {
-        vendor = JvmVendorSpec.ADOPTIUM
         languageVersion = JavaLanguageVersion.of(requiredJava.majorVersion)
     }
 }
@@ -130,11 +129,16 @@ publisher {
         apiKeys { github(key) }
     }
 
-    if (sc.properties["publish.type"] as String == "debug") {
+    val publishType = if (project.hasProperty("publish.type")) {
+        project.property("publish.type") // for supporting `-Pxxx=yyy` in command
+    } else {
+        sc.properties["publish.type"]
+    } as String
+    if (publishType == "debug") {
         // Enable Debug mode. When enabled, no files will actually be uploaded
         debug.set(true)
     } else {
-        versionType.set(sc.properties["publish.type"] as String)
+        versionType.set(publishType)
     }
 
     val modVersion = sc.properties["mod.version"] as String
