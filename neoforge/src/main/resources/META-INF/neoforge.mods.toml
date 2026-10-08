@@ -8,7 +8,7 @@ version = "${version}"
 displayName = "${name}"
 authors = "${authors}"
 description = "Better hashing algorithm for Vec3i & BlockPos"
-logoFile = "assets/${id}/icon.png"
+logoFile = "icon.png"
 logoBlur = false
 
 [[mixins]]
