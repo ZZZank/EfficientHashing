@@ -8,7 +8,7 @@
 mod.id = "efficient_hashing"
 mod.name = "Efficient Hashing"
 mod.group = "zank.mods"
-mod.version = "1.0.1"
+mod.version = "1.0.2"
 mod.authors = "Zank"
 mod.license = "LGPL-3.0"
 mod.description = "Better hashing algorithm for Vec3i & BlockPos"
